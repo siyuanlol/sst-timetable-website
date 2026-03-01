@@ -140,11 +140,11 @@ tr.today-row td.td-day { color:#fff }
 .cell .subj { font-weight:400; font-size:.82rem; letter-spacing:.07em; line-height:1; text-transform:uppercase }
 
 /* Plain */
-.sci,.math,.el,.hum,.chi,.cce,.hbl {
+.sci,.math,.el,.hum,.mt,.cce,.hbl {
   background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.1); color: rgba(220,220,220,0.6);
 }
 .hbl { font-size:.95rem; letter-spacing:.12em }
-
+.mt .subj { color: rgba(220,220,220,0.6); }
 /* Highlighted — initially same as plain, changed via JS */
 .sw,
 .cm,
