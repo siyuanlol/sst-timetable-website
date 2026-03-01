@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "site": "sst-timetable-website",
     "public": ".",
     "ignore": [
       "firebase.json",
