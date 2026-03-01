@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<<<<<<< HEAD
   <head>
     <meta charset="UTF-8" />
     <meta
@@ -222,3 +223,718 @@
     <script src="script.js?v=5" defer></script>
   </body>
 </html>
+=======
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="S2-10">
+<meta name="theme-color" content="#080808">
+<title>S2-10 Timetable</title>
+<link href="https://fonts.googleapis.com/css2?family=VT323&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<script>
+/* ============================================================
+   ✏️  EDIT YOUR TIMETABLE HERE — touch nothing below
+   ============================================================
+   Each block: { label, span, style }
+   span = number of 20-min periods
+   Each day spans must total 30 (08:00 to 18:00)
+
+   STYLES: sci math el hum chi cce hbl sw cm cmict brk empty
+   ============================================================ */
+
+const TITLE    = "S2-10";
+const SUBTITLE = "2026 TERM 1";
+
+const TIMES_ALL = [
+  "08:00","08:20","08:40","09:00","09:20","09:40",
+  "10:00","10:20","10:40","11:00","11:20","11:40",
+  "12:00","12:20","12:40","13:00","13:20","13:40",
+  "14:00","14:20","14:40","15:00","15:20","15:40",
+  "16:00","16:20","16:40","17:00","17:20","17:40",
+];
+
+const DAY_LABELS = ["Mo","Tu","Adv","Th","Fr"];
+
+const TIMETABLE = {
+  odd: [
+    [ // Monday
+      {label:"—",             span:3,  style:"empty"},
+      {label:"Chinese",       span:2,  style:"chi"  },
+      {label:"SCI",           span:3,  style:"sci"  },
+      {label:"BREAK",         span:2,  style:"brk"  },
+      {label:"MATH",          span:2,  style:"math" },
+      {label:"EL",            span:3,  style:"el"   },
+      {label:"CM(ADMT)",      span:3,  style:"cm"   },
+      {label:"CCE / Assembly",span:3,  style:"cce"  },
+      {label:"—",             span:9,  style:"empty"},
+    ],
+    [ // Tuesday
+      {label:"S&W",           span:3,  style:"sw"   },
+      {label:"SCI",           span:2,  style:"sci"  },
+      {label:"BREAK",         span:2,  style:"brk"  },
+      {label:"MATH",          span:3,  style:"math" },
+      {label:"Chinese",       span:3,  style:"chi"  },
+      {label:"HUM (GEOG)",    span:3,  style:"hum"  },
+      {label:"—",             span:14, style:"empty"},
+    ],
+    [ // Advisory (Wednesday)
+      {label:"—",             span:1,  style:"empty"},
+      {label:"Chinese",       span:3,  style:"chi"  },
+      {label:"EL",            span:2,  style:"el"   },
+      {label:"BREAK",         span:2,  style:"brk"  },
+      {label:"SCI",           span:2,  style:"sci"  },
+      {label:"HUM (GEOG)",    span:2,  style:"hum"  },
+      {label:"CM(ADMT)",      span:3,  style:"cm"   },
+      {label:"CCE / Assembly",span:3,  style:"cce"  },
+      {label:"—",             span:12, style:"empty"},
+    ],
+    [ // Thursday
+      {label:"HBL",           span:30, style:"hbl"  },
+    ],
+    [ // Friday
+      {label:"CM(ICT)",       span:2,  style:"cmict"},
+      {label:"MATH",          span:2,  style:"math" },
+      {label:"S&W",           span:3,  style:"sw"   },
+      {label:"BREAK",         span:2,  style:"brk"  },
+      {label:"SCI",           span:2,  style:"sci"  },
+      {label:"HUM (GEOG)",    span:3,  style:"hum"  },
+      {label:"—",             span:16, style:"empty"},
+    ],
+  ],
+  even: [
+    [ // Monday
+      {label:"—",             span:3,  style:"empty"},
+      {label:"MATH",          span:2,  style:"math" },
+      {label:"SCI",           span:3,  style:"sci"  },
+      {label:"BREAK",         span:2,  style:"brk"  },
+      {label:"EL",            span:3,  style:"el"   },
+      {label:"S&W",           span:3,  style:"sw"   },
+      {label:"Chinese",       span:2,  style:"chi"  },
+      {label:"CCE / Assembly",span:3,  style:"cce"  },
+      {label:"—",             span:9,  style:"empty"},
+    ],
+    [ // Tuesday
+      {label:"EL",            span:3,  style:"el"   },
+      {label:"CM(ADMT)",      span:2,  style:"cm"   },
+      {label:"BREAK",         span:2,  style:"brk"  },
+      {label:"HUM (GEOG)",    span:3,  style:"hum"  },
+      {label:"SCI",           span:3,  style:"sci"  },
+      {label:"MATH",          span:3,  style:"math" },
+      {label:"—",             span:14, style:"empty"},
+    ],
+    [ // Advisory (Wednesday)
+      {label:"—",             span:1,  style:"empty"},
+      {label:"S&W",           span:3,  style:"sw"   },
+      {label:"CM(ICT)",       span:2,  style:"cmict"},
+      {label:"BREAK",         span:2,  style:"brk"  },
+      {label:"CM(ADMT)",      span:2,  style:"cm"   },
+      {label:"Chinese",       span:3,  style:"chi"  },
+      {label:"EL",            span:2,  style:"el"   },
+      {label:"CCE / Assembly",span:3,  style:"cce"  },
+      {label:"—",             span:12, style:"empty"},
+    ],
+    [ // Thursday
+      {label:"—",             span:3,  style:"empty"},
+      {label:"SCI",           span:4,  style:"sci"  },
+      {label:"Chinese",       span:3,  style:"chi"  },
+      {label:"BREAK",         span:2,  style:"brk"  },
+      {label:"CM(ICT)",       span:3,  style:"cmict"},
+      {label:"MATH",          span:3,  style:"math" },
+      {label:"EL",            span:3,  style:"el"   },
+      {label:"—",             span:9,  style:"empty"},
+    ],
+    [ // Friday
+      {label:"CM(ADMT)",      span:2,  style:"cm"   },
+      {label:"MATH",          span:2,  style:"math" },
+      {label:"Chinese",       span:3,  style:"chi"  },
+      {label:"BREAK",         span:2,  style:"brk"  },
+      {label:"EL",            span:3,  style:"el"   },
+      {label:"HUM (GEOG)",    span:2,  style:"hum"  },
+      {label:"—",             span:16, style:"empty"},
+    ],
+  ],
+};
+/* ============================================================ END ============ */
+</script>
+
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --c-sw:    70,180,90;
+  --c-cm:    200,70,70;
+  --c-cmict: 180,70,200;
+  --c-brk:   255,255,255;
+  --glow: 1;
+}
+
+body {
+  background: #080808; color: #d0d0d0;
+  font-family: 'VT323', monospace;
+  min-height: 100vh; min-height: 100dvh;
+  display: flex; flex-direction: column;
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+}
+
+/* TOP BAR */
+.topbar {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 12px 6px; flex-shrink: 0; gap: 6px; flex-wrap: wrap;
+}
+.topbar-title { font-size: 1.3rem; letter-spacing: 0.15em; }
+.topbar-right { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.today-pill { font-family: 'Space Mono', monospace; font-size: 0.5rem; color: #555; letter-spacing: 0.04em; }
+
+/* TOGGLE GROUP (shared) */
+.tog-group {
+  display: flex; position: relative;
+  background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 20px; overflow: hidden; padding: 2px;
+}
+.tog-pill {
+  position: absolute; top: 2px; bottom: 2px; border-radius: 16px;
+  background: rgba(255,255,255,0.14);
+  transition: left .3s cubic-bezier(.4,0,.2,1), width .3s cubic-bezier(.4,0,.2,1);
+  pointer-events: none;
+}
+.tog-btn {
+  font-family: 'VT323', monospace; font-size: 0.95rem; letter-spacing: 0.08em;
+  padding: 3px 11px; background: none; border: none; color: #555;
+  cursor: pointer; transition: color .3s; position: relative; z-index: 1;
+}
+.tog-btn.active { color: #d0d0d0; }
+
+/* Settings icon */
+.settings-btn {
+  background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 50%; width: 28px; height: 28px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; font-size: 1rem; color: #555;
+  transition: color .2s, background .2s;
+}
+.settings-btn:hover, .settings-btn:active { color: #d0d0d0; background: rgba(255,255,255,0.1); }
+
+/* NOW BAR */
+.now-bar {
+  padding: 0 12px 8px; flex-shrink: 0;
+  display: flex; align-items: center; gap: 8px;
+}
+.now-dot {
+  width: 6px; height: 6px; border-radius: 50%; background: #ff3b3b; flex-shrink: 0;
+  box-shadow: 0 0 calc(var(--glow) * 7px) rgba(255,60,60,calc(var(--glow) * 0.9));
+}
+.now-label { font-family:'Space Mono',monospace; font-size:.55rem; color:rgba(255,255,255,.3); letter-spacing:.05em; }
+.now-subject { font-family:'VT323',monospace; font-size:1.1rem; letter-spacing:.1em; color:#fff; text-transform:uppercase; }
+
+/* TABLE WRAP */
+.table-wrap {
+  flex: 1; overflow-x: auto; overflow-y: auto;
+  padding: 0 8px 12px; -webkit-overflow-scrolling: touch; position: relative;
+}
+
+table {
+  border-collapse: separate; border-spacing: 1px;
+  table-layout: fixed; width: 100%;
+  opacity: 1; transition: opacity .25s ease;
+}
+table.hidden {
+  opacity: 0; pointer-events: none;
+  position: absolute; top: 0; left: 0; right: 0;
+}
+
+thead th {
+  background: rgba(255,255,255,0.06);
+  font-family: 'Space Mono',monospace; font-weight:400; color:#555;
+  padding: 5px 2px; border-radius: 3px; text-align: center; white-space: nowrap; overflow: hidden;
+}
+thead th.th-label { background: transparent; }
+/* In upper-sec mode, alternate cols show no text, just a thin bg */
+thead th.th-minor { background: rgba(255,255,255,0.03); font-size: 0; }
+thead th.th-major { font-size: 0.52rem; }
+
+td { padding: 1px; vertical-align: stretch; height: 42px; }
+td.td-day {
+  font-family:'VT323',monospace; font-size:.88rem; color:#d0d0d0;
+  text-align:center; vertical-align:middle; padding:1px 2px; width:26px;
+}
+tr.today-row td.td-day { color:#fff; }
+
+.cell {
+  border-radius: 5px; height: 40px;
+  display: flex; align-items: center; justify-content: center;
+  text-align: center; border: 1px solid transparent;
+  transition: filter .15s ease, box-shadow .15s ease;
+  cursor: default; overflow: hidden; padding: 2px 3px;
+}
+.cell:active { filter: brightness(1.4); }
+.cell .subj { font-weight:400; font-size:.82rem; letter-spacing:.07em; line-height:1; text-transform:uppercase; }
+
+/* Plain */
+.sci,.math,.el,.hum,.chi,.cce,.hbl {
+  background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.1); color: rgba(220,220,220,0.6);
+}
+.hbl { font-size:.95rem; letter-spacing:.12em; }
+
+/* Highlighted — driven by CSS vars */
+.sw    { background: rgba(var(--c-sw),   .28); border-color: rgba(var(--c-sw),   .65); }
+.cm    { background: rgba(var(--c-cm),   .28); border-color: rgba(var(--c-cm),   .65); }
+.cmict { background: rgba(var(--c-cmict),.28); border-color: rgba(var(--c-cmict),.65); }
+.brk   { background: rgba(var(--c-brk), .13); border-color: rgba(var(--c-brk),  .35); }
+.brk .subj { color: #fff; }
+.empty { background: rgba(255,255,255,.02); border-color: rgba(255,255,255,.03); color: rgba(255,255,255,.05); }
+
+/* Current lesson */
+.cell.now {
+  filter: brightness(1.6);
+  box-shadow: 0 0 calc(var(--glow)*12px) rgba(255,255,255,calc(var(--glow)*.18));
+}
+.cell.now .subj { color:#fff !important; }
+
+/* Time line */
+.time-line {
+  position: absolute; top: 0; width: 2px; background: #ff3b3b;
+  pointer-events: none; z-index: 10;
+  box-shadow: 0 0 calc(var(--glow)*8px) rgba(255,60,60,calc(var(--glow)*.7));
+  transition: left 60s linear;
+}
+.time-line::before {
+  content:''; position:absolute; top:-4px; left:-4px;
+  width:10px; height:10px; border-radius:50%; background:#ff3b3b;
+  box-shadow: 0 0 calc(var(--glow)*8px) rgba(255,60,60,calc(var(--glow)*.9));
+}
+
+/* SETTINGS OVERLAY */
+.s-overlay {
+  display:none; position:fixed; inset:0; z-index:200;
+  background:rgba(0,0,0,.75); backdrop-filter:blur(8px);
+  align-items:flex-end; justify-content:center;
+}
+.s-overlay.open { display:flex; }
+.s-panel {
+  background:#111; border:1px solid rgba(255,255,255,.12);
+  border-radius:18px 18px 0 0; padding:20px 20px 36px;
+  width:100%; max-width:460px;
+  animation: slideUp .32s cubic-bezier(.4,0,.2,1);
+}
+@keyframes slideUp { from{transform:translateY(100%)} to{transform:translateY(0)} }
+
+.s-head {
+  font-family:'VT323',monospace; font-size:1.3rem; letter-spacing:.15em; color:#d0d0d0;
+  display:flex; justify-content:space-between; align-items:center; margin-bottom:18px;
+}
+.s-close {
+  background:none; border:none; color:#555; font-family:'VT323',monospace;
+  font-size:1rem; letter-spacing:.1em; cursor:pointer;
+}
+
+.s-sec-label {
+  font-family:'Space Mono',monospace; font-size:.48rem; color:#444;
+  letter-spacing:.1em; text-transform:uppercase; margin-bottom:10px;
+}
+.s-section { margin-bottom:20px; }
+
+.c-row { display:flex; align-items:center; gap:12px; margin-bottom:10px; }
+.c-name { font-family:'VT323',monospace; font-size:1.05rem; letter-spacing:.07em; color:#999; min-width:90px; }
+.c-swatch {
+  width:34px; height:34px; border-radius:9px; border:2px solid rgba(255,255,255,.15);
+  cursor:pointer; overflow:hidden; position:relative; flex-shrink:0;
+}
+.c-swatch input[type=color] {
+  position:absolute; inset:-4px; width:calc(100%+8px); height:calc(100%+8px);
+  border:none; padding:0; cursor:pointer; opacity:0;
+}
+.c-preview { width:100%; height:100%; pointer-events:none; border-radius:7px; }
+.c-hex {
+  font-family:'Space Mono',monospace; font-size:.52rem; color:#555;
+  letter-spacing:.04em; cursor:pointer;
+}
+
+.g-row { display:flex; align-items:center; justify-content:space-between; }
+.g-label { font-family:'VT323',monospace; font-size:1.05rem; letter-spacing:.07em; color:#999; }
+
+/* iOS switch */
+.sw-wrap { position:relative; width:46px; height:26px; flex-shrink:0; }
+.sw-wrap input { opacity:0; width:0; height:0; }
+.sw-track {
+  position:absolute; inset:0; border-radius:26px;
+  background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.15);
+  transition:background .3s;
+}
+.sw-wrap input:checked + .sw-track { background:#ff3b3b; }
+.sw-thumb {
+  position:absolute; top:4px; left:4px; width:18px; height:18px;
+  border-radius:50%; background:#fff;
+  transition:transform .3s cubic-bezier(.4,0,.2,1);
+  pointer-events:none;
+}
+.sw-wrap input:checked ~ .sw-thumb { transform:translateX(20px); }
+
+.bottom {
+  text-align:center; font-family:'Space Mono',monospace;
+  font-size:.4rem; color:rgba(255,255,255,.07); padding:5px; flex-shrink:0;
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-title" id="titleEl"></div>
+  <div class="topbar-right">
+    <div class="today-pill" id="todayPill"></div>
+
+    <!-- Week toggle -->
+    <div class="tog-group">
+      <div class="tog-pill" id="pillWeek"></div>
+      <button class="tog-btn" id="btnOdd"   onclick="setWeek('odd')">ODD</button>
+      <button class="tog-btn" id="btnEven"  onclick="setWeek('even')">EVEN</button>
+    </div>
+
+    <!-- Sec toggle -->
+    <div class="tog-group">
+      <div class="tog-pill" id="pillSec"></div>
+      <button class="tog-btn" id="btn4pm" onclick="setSec('lower')">4PM</button>
+      <button class="tog-btn" id="btn6pm" onclick="setSec('upper')">6PM</button>
+    </div>
+
+    <div class="settings-btn" onclick="openSettings()" title="Settings">⚙</div>
+  </div>
+</div>
+
+<div class="now-bar" id="nowBar" style="display:none">
+  <div class="now-dot"></div>
+  <span class="now-label">NOW</span>
+  <span class="now-subject" id="nowSubj"></span>
+</div>
+
+<div class="table-wrap" id="tableWrap"></div>
+
+<div class="bottom" id="btmEl"></div>
+
+<!-- SETTINGS PANEL -->
+<div class="s-overlay" id="sOverlay" onclick="overlayClick(event)">
+  <div class="s-panel" id="sPanel">
+    <div class="s-head">
+      <span>SETTINGS</span>
+      <button class="s-close" onclick="closeSettings()">✕ CLOSE</button>
+    </div>
+
+    <div class="s-section">
+      <div class="s-sec-label">Highlight Colours</div>
+
+      <div class="c-row">
+        <span class="c-name">S&amp;W</span>
+        <div class="c-swatch">
+          <div class="c-preview" id="prvSw" style="background:#46b45a"></div>
+          <input type="color" id="clrSw" value="#46b45a" oninput="setColour('sw',this.value)">
+        </div>
+        <span class="c-hex" id="hexSw">#46b45a</span>
+      </div>
+
+      <div class="c-row">
+        <span class="c-name">CM(ADMT)</span>
+        <div class="c-swatch">
+          <div class="c-preview" id="prvCm" style="background:#c84646"></div>
+          <input type="color" id="clrCm" value="#c84646" oninput="setColour('cm',this.value)">
+        </div>
+        <span class="c-hex" id="hexCm">#c84646</span>
+      </div>
+
+      <div class="c-row">
+        <span class="c-name">CM(ICT)</span>
+        <div class="c-swatch">
+          <div class="c-preview" id="prvCmict" style="background:#b446c8"></div>
+          <input type="color" id="clrCmict" value="#b446c8" oninput="setColour('cmict',this.value)">
+        </div>
+        <span class="c-hex" id="hexCmict">#b446c8</span>
+      </div>
+
+      <div class="c-row">
+        <span class="c-name">BREAK</span>
+        <div class="c-swatch">
+          <div class="c-preview" id="prvBrk" style="background:#ffffff"></div>
+          <input type="color" id="clrBrk" value="#ffffff" oninput="setColour('brk',this.value)">
+        </div>
+        <span class="c-hex" id="hexBrk">#ffffff</span>
+      </div>
+    </div>
+
+    <div class="s-section">
+      <div class="s-sec-label">Effects</div>
+      <div class="g-row">
+        <span class="g-label">Glow &amp; shadows</span>
+        <label class="sw-wrap">
+          <input type="checkbox" id="glowChk" checked onchange="setGlow(this.checked)">
+          <div class="sw-track"></div>
+          <div class="sw-thumb"></div>
+        </label>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.getElementById('titleEl').textContent = TITLE;
+  document.getElementById('btmEl').textContent   = TITLE + ' · ' + SUBTITLE;
+
+  const DAYS_SH  = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  const nowDate  = new Date();
+  const todayDow = nowDate.getDay();
+  document.getElementById('todayPill').textContent =
+    DAYS_SH[todayDow] + ' · ' + nowDate.toLocaleDateString('en-SG',{day:'numeric',month:'short'});
+
+  // All period start minutes
+  const ALL_MINS = [
+    480,500,520, 540,560,580, 600,620,640, 660,680,700,
+    720,740,760, 780,800,820, 840,860,880,
+    900,920,940, 960,980,1000, 1020,1040,1060,
+  ];
+
+  const LOWER_N = 21; // up to 14:40 (cutoff 16:00)
+  const UPPER_N = 30; // up to 17:40 (cutoff 18:00)
+
+  let week = 'odd';
+  let sec  = 'lower';
+
+  function nCols()   { return sec === 'lower' ? LOWER_N : UPPER_N; }
+  function mins()    { return ALL_MINS.slice(0, nCols()); }
+  function endMin()  { return sec === 'lower' ? 960 : 1080; }  // 16:00 or 18:00
+  function times()   { return TIMES_ALL.slice(0, nCols()); }
+
+  // ── BUILD ──
+  const wrap = document.getElementById('tableWrap');
+
+  const timeLine = document.createElement('div');
+  timeLine.className = 'time-line'; timeLine.id = 'tl';
+  timeLine.style.display = 'none';
+  wrap.appendChild(timeLine);
+
+  function buildTable(wk) {
+    const n = nCols();
+    const ts = times();
+    const isUpper = sec === 'upper';
+    // In upper mode: show time on every even col (every 40 min), minor cols show nothing
+    let html = `<table id="tbl${wk}" class="hidden" style="min-width:${isUpper?940:700}px">
+<thead><tr><th class="th-label" style="width:26px"></th>`;
+    ts.forEach((t,i) => {
+      const minor = isUpper && (i % 2 !== 0);
+      html += minor
+        ? `<th class="th-minor"></th>`
+        : `<th class="th-major">${t}</th>`;
+    });
+    html += `</tr></thead><tbody>`;
+
+    TIMETABLE[wk].forEach((blocks, di) => {
+      const dow = di + 1;
+      const isToday = dow === todayDow;
+      html += `<tr${isToday?' class="today-row"':''}>`;
+      html += `<td class="td-day">${DAY_LABELS[di]}</td>`;
+      let rem = n;
+      blocks.forEach((b, bi) => {
+        if (rem <= 0) return;
+        const sp = Math.min(b.span, rem);
+        rem -= sp;
+        html += `<td colspan="${sp}"><div class="cell ${b.style}" id="c-${wk}-${di}-${bi}"><span class="subj">${b.label}</span></div></td>`;
+      });
+      html += `</tr>`;
+    });
+    html += `</tbody></table>`;
+    return html;
+  }
+
+  function rebuild() {
+    wrap.querySelectorAll('table').forEach(t => t.remove());
+    wrap.insertAdjacentHTML('afterbegin', buildTable('odd') + buildTable('even'));
+    applyColours();
+    showActive();
+    setTimeout(tick, 60);
+  }
+
+  function showActive() {
+    ['odd','even'].forEach(w => {
+      const t = document.getElementById('tbl'+w);
+      if (t) t.classList.toggle('hidden', w !== week);
+    });
+  }
+
+  // ── PILLS ──
+  function movePill(pillId, btnEl) {
+    const p = document.getElementById(pillId);
+    if (!p || !btnEl) return;
+    p.style.left  = btnEl.offsetLeft + 'px';
+    p.style.width = btnEl.offsetWidth + 'px';
+  }
+
+  function setWeek(w) {
+    week = w;
+    document.getElementById('btnOdd').classList.toggle('active',  w==='odd');
+    document.getElementById('btnEven').classList.toggle('active', w==='even');
+    movePill('pillWeek', document.getElementById(w==='odd'?'btnOdd':'btnEven'));
+    showActive(); tick();
+  }
+
+  function setSec(s) {
+    sec = s;
+    document.getElementById('btn4pm').classList.toggle('active', s==='lower');
+    document.getElementById('btn6pm').classList.toggle('active', s==='upper');
+    movePill('pillSec', document.getElementById(s==='lower'?'btn4pm':'btn6pm'));
+    rebuild();
+  }
+
+  setTimeout(() => {
+    movePill('pillWeek', document.getElementById('btnOdd'));
+    movePill('pillSec',  document.getElementById('btn4pm'));
+    document.getElementById('btnOdd').classList.add('active');
+    document.getElementById('btn4pm').classList.add('active');
+    rebuild();
+  }, 60);
+
+  // ── TIME FUNCTIONS ──
+  function nowMins() { const n=new Date(); return n.getHours()*60+n.getMinutes(); }
+
+  function colPositions() {
+    const tbl = document.getElementById('tbl'+week);
+    if (!tbl) return null;
+    const ths  = tbl.querySelectorAll('thead th');
+    const pm   = mins();
+    const em   = endMin();
+    const wr   = wrap.getBoundingClientRect();
+    const cols = [];
+    for (let i=1; i<ths.length; i++) {
+      const r = ths[i].getBoundingClientRect();
+      cols.push({
+        l: r.left  - wr.left + wrap.scrollLeft,
+        r: r.right - wr.left + wrap.scrollLeft,
+        s: pm[i-1],
+        e: i < ths.length-1 ? pm[i] : em
+      });
+    }
+    return cols;
+  }
+
+  function tick() {
+    const nm = nowMins();
+    const pm = mins();
+    const em = endMin();
+    const tl = document.getElementById('tl');
+    const nowBar  = document.getElementById('nowBar');
+    const nowSubj = document.getElementById('nowSubj');
+
+    const weekday = todayDow >= 1 && todayDow <= 5;
+    const inHours = nm >= pm[0] && nm <= em;
+
+    // clear lesson highlight
+    document.querySelectorAll('.cell.now').forEach(c=>c.classList.remove('now'));
+
+    if (!weekday || !inHours) {
+      tl.style.display = 'none';
+      nowBar.style.display = 'none';
+      return;
+    }
+
+    // which period
+    let nowP = -1;
+    for (let i=0; i<pm.length; i++) {
+      const e = i<pm.length-1 ? pm[i+1] : em;
+      if (nm >= pm[i] && nm < e) { nowP = i; break; }
+    }
+
+    // now bar label
+    const di = todayDow-1;
+    const day = TIMETABLE[week]?.[di];
+    if (day && nowP >= 0) {
+      let pIdx=0, label=null;
+      day.forEach(b => {
+        if (nowP >= pIdx && nowP <= pIdx+b.span-1) label = b.label;
+        pIdx += b.span;
+      });
+      if (label && label !== '—') {
+        nowBar.style.display = 'flex';
+        nowSubj.textContent = label;
+      } else { nowBar.style.display = 'none'; }
+
+      // highlight cell
+      if (nowP >= 0) {
+        pIdx = 0;
+        day.forEach((b, bi) => {
+          if (nowP >= pIdx && nowP <= pIdx+b.span-1 && b.style !== 'empty') {
+            const cell = document.getElementById(`c-${week}-${di}-${bi}`);
+            if (cell) cell.classList.add('now');
+          }
+          pIdx += b.span;
+        });
+      }
+    } else { nowBar.style.display = 'none'; }
+
+    // time line
+    const cols = colPositions();
+    if (!cols) { tl.style.display='none'; return; }
+
+    let xPos = null;
+    for (let i=0; i<cols.length; i++) {
+      const c = cols[i];
+      if (nm >= c.s && nm < c.e) {
+        xPos = c.l + (nm-c.s)/(c.e-c.s) * (c.r-c.l);
+        break;
+      }
+    }
+    if (xPos===null && nm >= cols[cols.length-1].s) xPos = cols[cols.length-1].r;
+
+    const tbl = document.getElementById('tbl'+week);
+    if (xPos !== null && tbl) {
+      const thead   = tbl.querySelector('thead');
+      const todayRow= tbl.querySelector('tr.today-row');
+      const wr      = wrap.getBoundingClientRect();
+      if (todayRow) {
+        const top = thead.getBoundingClientRect().bottom - wr.top + wrap.scrollTop;
+        const h   = todayRow.getBoundingClientRect().bottom - thead.getBoundingClientRect().bottom;
+        tl.style.display = 'block';
+        tl.style.left    = xPos + 'px';
+        tl.style.top     = top  + 'px';
+        tl.style.height  = Math.max(h,0) + 'px';
+      } else { tl.style.display='none'; }
+    } else { tl.style.display='none'; }
+  }
+
+  setInterval(tick, 60000);
+  wrap.addEventListener('scroll', tick);
+
+  // ── SETTINGS ──
+  function openSettings()  { document.getElementById('sOverlay').classList.add('open'); }
+  function closeSettings() { document.getElementById('sOverlay').classList.remove('open'); }
+  function overlayClick(e) { if (e.target===document.getElementById('sOverlay')) closeSettings(); }
+
+  function hexToRgb(h) {
+    return `${parseInt(h.slice(1,3),16)},${parseInt(h.slice(3,5),16)},${parseInt(h.slice(5,7),16)}`;
+  }
+
+  const KEY_VAR = { sw:'--c-sw', cm:'--c-cm', cmict:'--c-cmict', brk:'--c-brk' };
+  const KEY_ID  = { sw:'Sw',    cm:'Cm',     cmict:'Cmict',      brk:'Brk'     };
+
+  function setColour(key, hex) {
+    document.documentElement.style.setProperty(KEY_VAR[key], hexToRgb(hex));
+    const id = KEY_ID[key];
+    document.getElementById('prv'+id).style.background = hex;
+    document.getElementById('hex'+id).textContent = hex;
+    // update text colour of highlighted cells so they stay readable
+    if (key !== 'brk') {
+      document.querySelectorAll(`.${key} .subj`).forEach(el => el.style.color = hex);
+    }
+  }
+
+  function applyColours() {
+    Object.keys(KEY_ID).forEach(key => {
+      const inp = document.getElementById('clr'+KEY_ID[key]);
+      if (inp) setColour(key, inp.value);
+    });
+  }
+
+  function setGlow(on) {
+    document.documentElement.style.setProperty('--glow', on?'1':'0');
+  }
+</script>
+</body>
+</html>
+>>>>>>> 8da31f0ea4570cc0c5a78242fe593007c0131aee
