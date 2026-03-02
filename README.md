@@ -13,6 +13,5 @@ Ver 1.1 (1 Mar 2026)
 - fixed mother tongue cell outline issues
 - fixed like 2 bugs?
 
-
-# Next update
-- out by sat (7 mar) i hope 
+Ver 1.1.1 (2 Mar 2026)
+- made red timeline move in the background
