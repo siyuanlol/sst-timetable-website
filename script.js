@@ -623,10 +623,24 @@ const showToast = msg => {
   toastEl.classList.remove('hidden')
   toastEl.classList.add('show')
 
-  setTimeout(() => {
-    toastEl.classList.remove('show')
-    toastEl.classList.add('hidden')
-  }, 2200)
+ // after rebuild() definition and before setInterval:
+function startNowLineLoop() {
+  tick()                  // initial position
+  setInterval(tick, 60000)  // then every minute
+}
+
+wrap.addEventListener('scroll', tick)
+
+// call this instead of just rebuild() in your startup timeout:
+setTimeout(() => {
+  movePill('pillWeek', document.getElementById('btnOdd'))
+  movePill('pillSec',  document.getElementById('btn4pm'))
+  document.getElementById('btnOdd').classList.add('active')
+  document.getElementById('btn4pm').classList.add('active')
+  rebuild()
+  startNowLineLoop()
+}, 60)
+
 }
 
 const mapAuthError = err => {

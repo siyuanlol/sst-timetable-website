@@ -167,10 +167,16 @@ tr.today-row td.td-day { color:#fff }
 
 /* Time line */
 .time-line {
-  position: absolute; top: 0; width: 2px; background: #ff3b3b;
-  pointer-events: none; z-index: 10;
+  position: absolute;
+  top: 0;
+  width: 2px;
+  background: #ff3b3b;
+  pointer-events: none;
+  z-index: 10;
   box-shadow: 0 0 calc(var(--glow)*8px) rgba(255,60,60,calc(var(--glow)*.7));
   transition: left 60s linear;
+}
+
 }
 .time-line::before {
   content:''; position:absolute; top:-4px; left:-4px;
