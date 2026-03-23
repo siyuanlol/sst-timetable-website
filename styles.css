@@ -85,7 +85,7 @@ body {
 }
 .settings-btn:hover, .settings-btn:active { color: #d0d0d0; background: rgba(255,255,255,0.1) }
 
-/* NOW BAR */
+/* NOW BAR (header pill) */
 .now-bar {
   padding: 0 12px 8px; flex-shrink: 0;
   display: flex; align-items: center; gap: 8px;
@@ -165,7 +165,7 @@ tr.today-row td.td-day { color:#fff }
 }
 .cell.now .subj { color:#fff !important }
 
-/* Time line */
+/* Time line (vertical) */
 .time-line {
   position: absolute;
   top: 0;
@@ -177,7 +177,6 @@ tr.today-row td.td-day { color:#fff }
   transition: left 60s linear;
 }
 
-}
 .time-line::before {
   content:''; position:absolute; top:-4px; left:-4px;
   width:10px; height:10px; border-radius:50%; background:#ff3b3b;

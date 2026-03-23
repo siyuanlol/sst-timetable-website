@@ -1,3 +1,5 @@
+// script.js
+
 let currentUserId = null
 
 const coloursKey = () =>
@@ -46,7 +48,7 @@ const {
 } = safeFb
 
 const TITLE    = 'S2-10'
-const SUBTITLE = '2026 TERM 1'
+const SUBTITLE = '2026 TERM 2'
 
 const TIMES_ALL = [
   '08:00','08:20','08:40','09:00','09:20','09:40',
@@ -56,37 +58,37 @@ const TIMES_ALL = [
   '16:00','16:20','16:40','17:00','17:20','17:40'
 ]
 
-const DAY_LABELS = ['Mo','Tu','Adv','Th','Fr']
+const DAY_LABELS = ['Mon','Tue','Wed','Thu','Fri']
 
 const TIMETABLE = {
   odd: [
     [
       {label:'—',             span:3,  style:'empty'},
-      {label:'Mother Tongue',       span:2,  style:'mt'},
-      {label:'SCI',           span:3,  style:'sci'},
+      {label:'Mother Tongue', span:3,  style:'mt'},
+      {label:'SCI',           span:2,  style:'sci'},
       {label:'BREAK',         span:2,  style:'brk'},
-      {label:'MATH',          span:2,  style:'math'},
-      {label:'EL',            span:3,  style:'el'},
-      {label:'CM(ADMT)',      span:3,  style:'cm'},
+      {label:'EL',          span:3,  style:'el'},
+      {label:'CM(ADMT)',            span:2,  style:'cm'},
+      {label:'S&W',      span:3,  style:'sw'},
       {label:'CCE / Assembly',span:3,  style:'cce'},
       {label:'—',             span:9,  style:'empty'}
     ],
     [
-      {label:'S&W',           span:3,  style:'sw'},
-      {label:'SCI',           span:2,  style:'sci'},
+      {label:'HUM (GEOG)',           span:2,  style:'hum'},
+      {label:'MATH',           span:3,  style:'math'},
       {label:'BREAK',         span:2,  style:'brk'},
-      {label:'MATH',          span:3,  style:'math'},
-      {label:'Mother Tongue',       span:3,  style:'mt'},
-      {label:'HUM (GEOG)',    span:3,  style:'hum'},
+      {label:'CM(ICT)',          span:3,  style:'cmict'},
+      {label:'Mother Tongue', span:3,  style:'mt'},
+      {label:'SCI',    span:3,  style:'sci'},
       {label:'—',             span:14, style:'empty'}
     ],
     [
       {label:'—',             span:1,  style:'empty'},
-      {label:'Mother Tongue',       span:3,  style:'mt'},
+      {label:'SCI', span:2,  style:'sci'},
       {label:'EL',            span:2,  style:'el'},
-      {label:'BREAK',         span:2,  style:'brk'},
-      {label:'SCI',           span:2,  style:'sci'},
-      {label:'HUM (GEOG)',    span:2,  style:'hum'},
+      {label:'S&W',         span:3,  style:'sw'},
+      {label:'BREAK',           span:2,  style:'brk'},
+      {label:'MATH',    span:2,  style:'math'},
       {label:'CM(ADMT)',      span:3,  style:'cm'},
       {label:'CCE / Assembly',span:3,  style:'cce'},
       {label:'—',             span:12, style:'empty'}
@@ -95,64 +97,64 @@ const TIMETABLE = {
       {label:'HBL',           span:30, style:'hbl'}
     ],
     [
-      {label:'CM(ICT)',       span:2,  style:'cmict'},
-      {label:'MATH',          span:2,  style:'math'},
-      {label:'S&W',           span:3,  style:'sw'},
+      {label:'HUM (GEOG)',       span:3,  style:'hum'},
+      {label:'Mother Tongue',          span:2,  style:'mt'},
+      {label:'CM(ICT)',           span:2,  style:'cmict'},
       {label:'BREAK',         span:2,  style:'brk'},
-      {label:'SCI',           span:2,  style:'sci'},
-      {label:'HUM (GEOG)',    span:3,  style:'hum'},
+      {label:'EL',           span:3,  style:'el'},
+      {label:'MATH',    span:2,  style:'math'},
       {label:'—',             span:16, style:'empty'}
     ]
   ],
   even: [
     [
       {label:'—',             span:3,  style:'empty'},
-      {label:'MATH',          span:2,  style:'math'},
+      {label:'CM(ADMT)',          span:2,  style:'cm'},
       {label:'SCI',           span:3,  style:'sci'},
       {label:'BREAK',         span:2,  style:'brk'},
-      {label:'EL',            span:3,  style:'el'},
-      {label:'S&W',           span:3,  style:'sw'},
-      {label:'Mother Tongue',       span:2,  style:'mt'},
+      {label:'HUM(GEOG)',            span:3,  style:'hum'},
+      {label:'Mother Tongue',           span:2,  style:'mt'},
+      {label:'EL', span:3,  style:'el'},
       {label:'CCE / Assembly',span:3,  style:'cce'},
       {label:'—',             span:9,  style:'empty'}
     ],
     [
-      {label:'EL',            span:3,  style:'el'},
-      {label:'CM(ADMT)',      span:2,  style:'cm'},
+      {label:'SCI',            span:3,  style:'sci'},
+      {label:'HUM(GEOG)',      span:2,  style:'hum'},
       {label:'BREAK',         span:2,  style:'brk'},
-      {label:'HUM (GEOG)',    span:3,  style:'hum'},
-      {label:'SCI',           span:3,  style:'sci'},
+      {label:'EL',    span:3,  style:'el'},
+      {label:'S&W',           span:3,  style:'sw'},
       {label:'MATH',          span:3,  style:'math'},
       {label:'—',             span:14, style:'empty'}
     ],
     [
       {label:'—',             span:1,  style:'empty'},
-      {label:'S&W',           span:3,  style:'sw'},
+      {label:'SCI',           span:2,  style:'sci'},
       {label:'CM(ICT)',       span:2,  style:'cmict'},
+      {label:'S&W',      span:3,  style:'sw'},
       {label:'BREAK',         span:2,  style:'brk'},
-      {label:'CM(ADMT)',      span:2,  style:'cm'},
-      {label:'Mother Tongue',       span:3,  style:'mt'},
-      {label:'EL',            span:2,  style:'el'},
+      {label:'MATH',      span:2,  style:'math'},
+      {label:'Mother Tongue', span:3,  style:'mt'},
       {label:'CCE / Assembly',span:3,  style:'cce'},
       {label:'—',             span:12, style:'empty'}
     ],
     [
       {label:'—',             span:3,  style:'empty'},
       {label:'SCI',           span:4,  style:'sci'},
-      {label:'Mother Tongue',       span:3,  style:'mt'},
+      {label:'Mother Tongue', span:3,  style:'mt'},
       {label:'BREAK',         span:2,  style:'brk'},
-      {label:'CM(ICT)',       span:3,  style:'cmict'},
+      {label:'CM(ADMT)',       span:3,  style:'cm'},
       {label:'MATH',          span:3,  style:'math'},
       {label:'EL',            span:3,  style:'el'},
       {label:'—',             span:9,  style:'empty'}
     ],
     [
-      {label:'CM(ADMT)',      span:2,  style:'cm'},
-      {label:'MATH',          span:2,  style:'math'},
-      {label:'Mother Tongue',       span:3,  style:'mt'},
+      {label:'EL',      span:2,  style:'el'},
+      {label:'CM(ADMT)',          span:2,  style:'cm'},
+      {label:'Mother Tongue', span:3,  style:'mt'},
       {label:'BREAK',         span:2,  style:'brk'},
-      {label:'EL',            span:3,  style:'el'},
-      {label:'HUM (GEOG)',    span:2,  style:'hum'},
+      {label:'MATH',            span:2,  style:'math'},
+      {label:'HUM (GEOG)',    span:3,  style:'hum'},
       {label:'—',             span:16, style:'empty'}
     ]
   ]
@@ -328,7 +330,7 @@ function tick() {
 
   if (!weekday || !inHours) {
     tl.style.display = 'none'
-    nowBar.style.display = 'none'
+    if (nowBar) nowBar.style.display = 'none'
     return
   }
 
@@ -354,10 +356,10 @@ function tick() {
     })
 
     if (label && label !== '—') {
-      nowBar.style.display = 'flex'
-      nowSubj.textContent = label
+      if (nowBar) nowBar.style.display = 'flex'
+      if (nowSubj) nowSubj.textContent = label
     } else {
-      nowBar.style.display = 'none'
+      if (nowBar) nowBar.style.display = 'none'
     }
 
     pIdx = 0
@@ -369,7 +371,7 @@ function tick() {
       pIdx += b.span
     })
   } else {
-    nowBar.style.display = 'none'
+    if (nowBar) nowBar.style.display = 'none'
   }
 
   const cols = colPositions()
@@ -409,6 +411,7 @@ function tick() {
   }
 }
 
+// keep it moving & synced
 setInterval(tick, 60000)
 wrap.addEventListener('scroll', tick)
 
@@ -454,10 +457,10 @@ window.addEventListener('DOMContentLoaded', () => {
   const clrCmict = document.getElementById('clrCmict')
   const clrBrk   = document.getElementById('clrBrk')
 
-  if (clrSw)    clrSw.addEventListener('input', e => setColour('sw', e.target.value, true))
-  if (clrCm)    clrCm.addEventListener('input', e => setColour('cm', e.target.value, true))
+  if (clrSw)    clrSw.addEventListener('input', e => setColour('sw',    e.target.value, true))
+  if (clrCm)    clrCm.addEventListener('input', e => setColour('cm',    e.target.value, true))
   if (clrCmict) clrCmict.addEventListener('input', e => setColour('cmict', e.target.value, true))
-  if (clrBrk)   clrBrk.addEventListener('input', e => setColour('brk', e.target.value, true))
+  if (clrBrk)   clrBrk.addEventListener('input', e => setColour('brk',  e.target.value, true))
 
   document.querySelectorAll('.clr-clear-btn').forEach(btn => {
     const key = btn.dataset.key
@@ -498,6 +501,9 @@ window.addEventListener('DOMContentLoaded', () => {
   })
 
   applyColours()
+
+  // kick the now-line once DOM + first tables are ready
+  setTimeout(tick, 200)
 })
 
 function hexToRgb(h) {
@@ -505,7 +511,7 @@ function hexToRgb(h) {
 }
 
 const KEY_VAR = { sw:'--c-sw', cm:'--c-cm', cmict:'--c-cmict', brk:'--c-brk' }
-const KEY_ID  = { sw:'Sw',    cm:'Cm',     cmict:'Cmict',      brk:'Brk' }
+const KEY_ID  = { sw:'Sw',     cm:'Cm',     cmict:'Cmict',    brk:'Brk' }
 
 function resetHighlightStyles() {
   document.documentElement.style.setProperty('--c-sw',    '70,180,90')
@@ -622,25 +628,6 @@ const showToast = msg => {
   toastEl.textContent = msg
   toastEl.classList.remove('hidden')
   toastEl.classList.add('show')
-
- // after rebuild() definition and before setInterval:
-function startNowLineLoop() {
-  tick()                  // initial position
-  setInterval(tick, 60000)  // then every minute
-}
-
-wrap.addEventListener('scroll', tick)
-
-// call this instead of just rebuild() in your startup timeout:
-setTimeout(() => {
-  movePill('pillWeek', document.getElementById('btnOdd'))
-  movePill('pillSec',  document.getElementById('btn4pm'))
-  document.getElementById('btnOdd').classList.add('active')
-  document.getElementById('btn4pm').classList.add('active')
-  rebuild()
-  startNowLineLoop()
-}, 60)
-
 }
 
 const mapAuthError = err => {
